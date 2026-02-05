@@ -21,6 +21,8 @@ The traffic flow follows a structured path to ensure maximum security:
 - **Orchestration Layer (ALB)**: Performs health checks and routes traffic to healthy instances.
 
 - **Compute Layer (EC2)**: Apache servers process requests within a restricted security perimeter.
+  
+![Architecture Diagram]( https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/Architecture.png)
 
 # Tech Stack
 - **Cloud**: **AWS** (EC2, VPC, ALB, WAF)
@@ -68,6 +70,7 @@ During implementation, the ALB returned a **504 Gateway Timeout**, marking insta
   2. Corrected the Inbound Rule to point exactly to the **ALB-SG ID**.
   3. Verified the Health Check Path matched the root directory (`/`).
 * **The Lesson:** This reinforced the importance of **Security Group Nesting** and referencing IDs rather than IPs for a dynamic, secure "chain of trust."
+![Target Group Showing Healthy Instances](https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/Target%20Group.png)
 
 # Testing & Validation
 To verify the integrity of the setup, the following tests were performed:
@@ -77,6 +80,12 @@ To verify the integrity of the setup, the following tests were performed:
 - SQLi Protection: Attempted common SQL injection strings in the URL; AWS WAF successfully returned a 403 Forbidden error.
 
 - Geo-blocking: Accessed the site via a VPN (simulating a non-India origin); the WAF successfully blocked the connection.
+![Alpha Node Status]([https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/Target%20Group.png](https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/Alpha%20Node%20Active.png))
+
+![Beta Node Status](https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/Beta%20Node%20Active.png)
+
+![SQL Injection]( https://github.com/KmNandini12/Multi-Tier-Secure-Web-Infrastructure-on-AWS/blob/28cbad184a69c9fa5ab317e0a0ebe979b4c47f61/SQLi.png)
+
 
 # User Data Script
 The servers were bootstrapped using the following script to provide real-time metadata:
